@@ -6,5 +6,7 @@ WORKDIR /app
 ADD . /app
 # run pip to install the dependencies of the flask app
 RUN pip install -r requirements.txt
+# serve
+EXPOSE 5000
 # define the command to start the container
 CMD ["python","server.py"]

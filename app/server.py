@@ -33,4 +33,5 @@ class Msg(Resource):
 api.add_resource(Msg, "/msg")
 
 if __name__ == "__main__":
-    app.run(debug=True) # TODO: nope.
+    app.run(host="0.0.0.0", port=5000, debug=True) # TODO: these should all be taken from some conf file. 
+                                                   #       probably share it with docker..
