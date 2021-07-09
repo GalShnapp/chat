@@ -1,7 +1,6 @@
 import json
-from json.encoder import JSONEncoder
 from flask import Flask
-from flask_restful import Api, Resource
+from flask_restful import Api, Resource, reqparse
 
 app = Flask(__name__)
 api = Api(app)
@@ -11,6 +10,9 @@ api = Api(app)
 #              DB                #
 ##################################
 
+msg_put_args = reqparse.RequestParser()
+msg_put_args.add_argument("sender", type=str, help="your name, luv?", required = True)
+msg_put_args.add_argument("payload", type=str, help="Whatcha gotta say", required = True)
 MSGS = []
 
 
@@ -20,11 +22,12 @@ MSGS = []
 
 class Msg(Resource):
     def get(self):
-        MSGS.append({})
         return json.dumps(MSGS)
 
-    def post(self):
-        return {}
+    def put(self):
+        args = msg_put_args.parse_args()
+        MSGS.append(args)
+        return {}, 201
 
 
 api.add_resource(Msg, "/msg")
