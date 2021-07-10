@@ -14,6 +14,8 @@ db=SQLAlchemy(app)
 
 
 from chat.models import Conversation
+
+# GET DB to preload.
 db.create_all()
 chat_room = Conversation()
 db.session.add(chat_room)
