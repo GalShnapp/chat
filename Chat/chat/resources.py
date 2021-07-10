@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-from chat import db, api
+from chat import db, api, chat_room
 from chat.models import Conversation, Single_Msg
 import json
 
@@ -10,7 +10,7 @@ msg_put_args.add_argument("payload", type=str, help="Whatcha gotta say", require
 MSGS = []
 
 
-
+print(chat_room)
 
 class Msg(Resource):
     def get(self):
@@ -20,9 +20,9 @@ class Msg(Resource):
     def post(self):
         args = msg_put_args.parse_args()
         MSGS.append(args)
-#        msg = Single_Msg(sender=args["sender"], payload=args["payload"])
-#        db.session.add(msg)
-#        db.session.commit()
+        msg = Single_Msg(sender=args["sender"], payload=args["payload"],conversation=chat_room.id)
+        db.session.add(msg)
+        db.session.commit()
         return args, 201
 
 

@@ -9,7 +9,7 @@ MAX_PW_BUFF=60
 # For fast pull 
 class Conversation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    msgs = db.relationship('Single_Msg', backref='Conversation', lazy=True) # should I lazy = true? intuition says NO! but, we'll see.
+    msgs = db.relationship('Single_Msg', backref='Conversation') # should I lazy = true? intuition says NO! but, we'll see.
     
 
 class Single_Msg(db.Model):
